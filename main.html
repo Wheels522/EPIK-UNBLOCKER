@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EPIK UNBLOCKER</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: linear-gradient(45deg, #ff0000, #ff9900, #ffff00, #33cc33, #0099ff, #9933ff, #ff0099);
+        background-size: 400% 400%;
+        animation: gradientAnimation 10s ease infinite;
+        font-family: Arial, sans-serif;
+        overflow-y: auto; /* Ensure vertical scrollbar */
+    }
+    
+    @keyframes gradientAnimation {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+    
+    .container {
+        text-align: center;
+        padding-top: 50px; /* Increase the top padding */
+    }
+    
+    .iframe-container {
+        margin-bottom: 20px;
+        position: relative;
+    }
+    
+    iframe {
+        border: none;
+        height: 500px;
+        width: 800px;
+    }
+    
+    .fullscreen-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 10px 20px;
+        background-color: #3498db; /* Blue color */
+        color: #fff; /* White text color */
+        border-radius: 20px; /* Rounded corners */
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .url-button {
+        padding: 15px 30px;
+        background-color: #4CAF50; /* Green color */
+        color: #fff; /* White text color */
+        border: none;
+        border-radius: 25px; /* Rounded corners */
+        cursor: pointer;
+        font-size: 18px;
+        font-family: Arial, sans-serif;
+        transition: background-color 0.3s ease;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); /* Drop shadow */
+    }
+
+    .url-button:hover {
+        background-color: #45a049; /* Darker green color on hover */
+    }
+
+    .html-button {
+        padding: 15px 30px;
+        background-color: #3498db; /* Blue color */
+        color: #fff; /* White text color */
+        border: none;
+        border-radius: 25px; /* Rounded corners */
+        cursor: pointer;
+        font-size: 18px;
+        font-family: Arial, sans-serif;
+        transition: background-color 0.3s ease;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); /* Drop shadow */
+    }
+
+    .html-button:hover {
+        background-color: #2980b9; /* Darker blue color on hover */
+    }
+
+    .html-shower {
+        margin-top: 20px;
+        background-color: #f1f1f1; /* Light gray background */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); /* Drop shadow */
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: left;
+        overflow-y: auto; /* Ensure vertical scrollbar */
+        height: 300px; /* Initial height */
+    }
+
+    .fullscreen-html-button {
+        background-color: #3498db; /* Blue color */
+        color: #fff; /* White text color */
+        border: none;
+        border-radius: 25px; /* Rounded corners */
+        cursor: pointer;
+        font-size: 16px;
+        font-family: Arial, sans-serif;
+        transition: background-color 0.3s ease;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); /* Drop shadow */
+        margin-top: 10px;
+        padding: 10px 20px;
+    }
+
+    .fullscreen-html-button:hover {
+        background-color: #2980b9; /* Darker blue color on hover */
+    }
+
+    .fullscreen-html-shower {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 9999;
+        background-color: #fff;
+        padding: 20px;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>EPIK UNBLOCKER</h1>
+    <!-- URL button -->
+    <button class="url-button" onclick="showIframePrompt()">Enter URL for Iframe</button>
+    <div class="iframe-container">
+        <iframe id="myIframe" src="" frameborder="0" scrolling="no"></iframe>
+        <!-- Full screen button inside iframe -->
+        <button class="fullscreen-button" onclick="toggleFullScreen()">Full Screen</button>
+    </div>
+    <!-- HTML button and popup -->
+    <button class="html-button" onclick="showHtmlPopup()">Enter HTML</button>
+    <div id="htmlPopup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closeHtmlPopup()">&times;</span>
+            <textarea id="htmlInput" rows="8" cols="50"></textarea>
+            <br>
+            <button onclick="displayHtml()">Submit</button>
+            <div id="htmlOutput" class="html-shower"></div>
+            <!-- Full screen button for HTML shower -->
+            <button class="fullscreen-html-button" onclick="toggleHtmlFullscreen()">Full Screen</button>
+        </div>
+    </div>
+</div>
+
+<script>
+function showIframePrompt() {
+    var url = prompt("Please enter the URL for the iframe:");
+    if (url !== null && url !== "") {
+        document.getElementById("myIframe").src = url;
+    }
+}
+
+function toggleFullScreen() {
+    var iframe = document.getElementById("myIframe");
+    if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
+        if (iframe.requestFullscreen) {
+            iframe.requestFullscreen();
+        } else if (iframe.msRequestFullscreen) {
+            iframe.msRequestFullscreen();
+        } else if (iframe.mozRequestFullScreen) {
+            iframe.mozRequestFullScreen();
+        } else if (iframe.webkitRequestFullscreen) {
+            iframe.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+        }
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        }
+    }
+}
+
+function showHtmlPopup() {
+    var htmlPopup = document.getElementById("htmlPopup");
+    htmlPopup.style.display = "block";
+}
+
+function closeHtmlPopup() {
+    var htmlPopup = document.getElementById("htmlPopup");
+    htmlPopup.style.display = "none";
+}
+
+function displayHtml() {
+    var htmlInput = document.getElementById("htmlInput").value;
+    document.getElementById("htmlOutput").innerHTML = htmlInput;
+}
+
+function toggleHtmlFullscreen() {
+    var htmlShower = document.getElementById("htmlOutput");
+    htmlShower.classList.toggle("fullscreen-html-shower");
+}
+</script>
+</body>
+</html>
